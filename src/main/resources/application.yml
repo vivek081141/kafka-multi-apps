@@ -1,0 +1,15 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      concurrency: 1
+  application:
+    name: kafka-producer
+logging:
+  level:
+    org.apache.kafka: DEBUG
+server:
+  port: 18082
