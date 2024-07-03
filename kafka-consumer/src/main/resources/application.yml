@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    # client-id: test-consumer-client
+    bootstrap-servers: localhost:29092
+    consumer:
+      # client-id: test-consumer
+      group-id: my-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 1  # Number of threads for the consumer to handle messages in parallel
+  application:
+    name: consumer
+logging:
+  level:
+    org.apache.kafka: INFO
+server:
+  port: 18081
