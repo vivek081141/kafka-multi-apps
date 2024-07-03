@@ -3,6 +3,7 @@ version: '3.7'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     ports:
       - "2181:2181"
     environment:
@@ -11,6 +12,7 @@ services:
 
   broker-1:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:
@@ -26,9 +28,21 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
 
-  
+  schema-registry:
+    container_name: kafka_schema
+    image: confluentinc/cp-schema-registry:latest
+    depends_on:
+      - broker-1
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://broker-1:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
+    container_name: kafka_ui
     depends_on:
       - broker-1
     ports:
@@ -37,3 +51,15 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker-1:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:2181
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://localhost:8081
+
+  my-producer-app:
+    image: my-image:latest
+    container_name: my-producer-app
+    ports:
+      - "18082:18082"
+    volumes:
+      - /tmp
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+    restart: always

@@ -16,4 +16,10 @@ public class KafkaController {
         kafkaProducerService.sendMessage(message);
         return "Message sent to Kafka topic";
     }
+
+    //health check endpoint
+    @GetMapping("/health")
+    public String health() {
+        return "I am healthy";
+    }
 }

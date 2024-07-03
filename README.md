@@ -1,7 +1,24 @@
-Step 1: Create a Docker Compose File
-
 Step 2: Run Docker Compose
 docker-compose up -d
+
+
+Step 1: Running the application
+
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=my-image:latest
+
+docker build -t my-image:latest .
+
+
+docker push vivek081141/producer:0.0.1-SNAPSHOT
+
+or using spotify plugin
+mvn clean package docker:build docker:push
+
+
+
+Step3: Run the application
+docker run -d -p 18082:18082 producer-app
+
 
 Step 3: Verify Kafka and ZooKeeper are Running
 docker-compose ps
