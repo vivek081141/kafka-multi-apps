@@ -53,13 +53,24 @@ services:
       KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:2181
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://localhost:8081
 
-  my-producer-app:
-    image: my-image:latest
-    container_name: my-producer-app
+  my-kafka-producer:
+    image: my-kafka-producer:latest
+    container_name: my-kafka-producer
     ports:
       - "18082:18082"
     volumes:
       - /tmp
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=prod
+    restart: always
+
+  my-kafka-consumer:
+    image: my-kafka-consumer:latest
+    container_name: my-kafka-consumer
+    ports:
+      - "18081:18081"
+    volumes:
+      - /tmp
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     restart: always

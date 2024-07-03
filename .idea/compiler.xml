@@ -14,8 +14,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="kafka-consumer" options="-parameters" />
+      <module name="kafka-multi-apps" options="" />
       <module name="kafka-producer" options="-parameters" />
-      <module name="producer" options="" />
     </option>
   </component>
 </project>
