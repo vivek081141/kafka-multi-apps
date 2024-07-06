@@ -40,6 +40,7 @@
     </dependencies>
 
     <build>
+        <finalName>kafka-consumer</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -55,18 +56,6 @@
                         <name>my-kafka-consumer:latest</name>
                     </image>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-image</goal>
-                        </goals>
-                        <configuration>
-                            <image>
-                                <name>my-kafka-consumer:latest</name>
-                            </image>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>

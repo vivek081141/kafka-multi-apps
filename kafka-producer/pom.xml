@@ -50,6 +50,7 @@
     </dependencies>
 
     <build>
+        <finalName>kafka-producer</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -65,7 +66,7 @@
                         <name>my-kafka-producer:latest</name>
                     </image>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <goals>
                             <goal>build-image</goal>
@@ -76,7 +77,7 @@
                             </image>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 
         </plugins>

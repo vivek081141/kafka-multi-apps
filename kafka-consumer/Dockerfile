@@ -1,7 +1,8 @@
 FROM openjdk:17-jdk-slim
 VOLUME /tmp
-COPY target/kafka-consumer-1.0.0-SNAPSHOT.jar kafka-consumer-1.0.0-SNAPSHOT.jar
+COPY target/kafka-consumer.jar kafka-consumer.jar
 EXPOSE 18081
-ENTRYPOINT ["java","-jar","kafka-consumer-1.0.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","kafka-consumer.jar"]
 
-#docker build -t my-image:latest .
+#docker build -t kafka-consumer:latest .
+## Docker file is just for the representation cause github action is building the image and pushing it to docker hub
