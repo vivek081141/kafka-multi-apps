@@ -23,8 +23,8 @@ jobs:
           architecture: x64
           cache: maven
 
-      - name: Build kafka-consumer with Maven
-        run: mvn clean package -f kafka-consumer/pom.xml -Dmaven.test.skip=true
+      - name: Build kafka apps with Maven
+        run: mvn clean package
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
