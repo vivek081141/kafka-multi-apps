@@ -54,7 +54,7 @@ services:
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://localhost:8081
 
   my-kafka-producer:
-    image: kafka-consumer:latest
+    image: vivek081141/kafka-consumer:latest
     container_name: kafka-consumer
     ports:
       - "18082:18082"
@@ -65,7 +65,7 @@ services:
     restart: always
 
   my-kafka-consumer:
-    image: kafka-producer:latest
+    image: vivek081141/kafka-producer:latest
     container_name: kafka-producer
     ports:
       - "18081:18081"

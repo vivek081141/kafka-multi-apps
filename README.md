@@ -1,44 +1,62 @@
-Step 2: Run Docker Compose
-docker-compose up -d
+# Kafka Multi-Module Application
 
+This repository contains a multi-module Maven project for a Kafka-based application, consisting of a Kafka producer and a Kafka consumer. The project is designed to be easily deployable using Docker and Docker Compose, with continuous integration and deployment set up using GitHub Actions.
 
-Step 1: Running the application
+## Project Structure
 
-mvn spring-boot:build-image -Dspring-boot.build-image.imageName=my-image:latest
+- **kafka-consumer**: The module for the Kafka consumer application.
+- **kafka-producer**: The module for the Kafka producer application.
+- **docker-compose.yml**: Docker Compose file to set up the Kafka environment along with the producer and consumer applications.
+- **.github/workflows/docker-image.yml**: GitHub Actions workflow file for building and publishing Docker images.
 
-docker build -t my-image:latest .
+## Prerequisites
 
+- Docker
+- Docker Compose
+- Maven
+- Java 17
 
-docker push vivek081141/producer:0.0.1-SNAPSHOT
+## Getting Started
 
-or using spotify plugin
-mvn clean package docker:build docker:push
+### Building the Project
 
+To build the project, run the following command from the root directory:
 
+```bash
+mvn clean package
+```
 
-Step3: Run the application
-docker run -d -p 18082:18082 producer-app
+### Running the Application
+Ensure Docker and Docker Compose are installed on your machine. Use the following command to start all services defined in the docker-compose.yml file:
+```bash
+docker-compose up
+```
 
+To stop the services, run:
 
-Step 3: Verify Kafka and ZooKeeper are Running
-docker-compose ps
-
-Step 4: Interact with Kafka
-docker exec -it <kafka_container_id> /bin/bash
-
-Example Kafka Commands
-kafka-topics --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-
-List topics:
-kafka-topics --list --bootstrap-server localhost:9092
-
-Produce messages:
-kafka-console-producer --topic test-topic --bootstrap-server localhost:9092
-
-
-Consume messages:
-kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092 --from-beginning
-
-
-STOP
+```bash
 docker-compose down
+``` 
+
+## Accessing the Applications
+
+**1. Producer Application**: To publish a message to the Kafka topic, 
+use the producer application, accessible at http://localhost:18082.
+
+```bash
+curl --location 'http://localhost:18082/send?message=HelloWorld'
+``` 
+
+**2. Consumer Application**: The consumer is available at port 18081 and will log the received messages to the console.
+
+```bash
+docker logs kafka-consumer
+```
+
+**3. Kafka Broker**: The Kafka broker is accessible at localhost:9092.
+
+**4. Kafka Zookeeper**: The Zookeeper is accessible at localhost:2181.
+
+**5. Kafka Schema Registry**: The schema registry is accessible at http://localhost:8081.
+
+**6. Kafka UI**: The Kafka UI is accessible at http://localhost:8090/.
