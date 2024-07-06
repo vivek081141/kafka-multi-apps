@@ -40,6 +40,17 @@ jobs:
           platforms: linux/arm64  # Specify platform for Mac M1 chip
           tags: ${{ secrets.DOCKER_USERNAME }}/kafka-consumer:latest
 
+      - name: Build and Push Docker image for kafka-producer
+        uses: docker/build-push-action@v2
+        with:
+          context: ./kafka-producer
+          push: true
+          platforms: linux/arm64  # Specify platform for Mac M1 chip
+          tags: ${{ secrets.DOCKER_USERNAME }}/kafka-consumer:latest
+
+      - name: Log out from Docker Hub
+        run: docker logout
+
       - name: Log out from Docker Hub
         run: docker logout
 
